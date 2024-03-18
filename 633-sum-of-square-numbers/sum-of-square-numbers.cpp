@@ -7,7 +7,7 @@ public:
     }
     bool judgeSquareSum(int c) {
         int x=0;
-        int y=c;
+        int y=sqrt(c)*sqrt(c);
         while(x<=y){
        if(isSquare(x) && isSquare(y)){
         return true;
