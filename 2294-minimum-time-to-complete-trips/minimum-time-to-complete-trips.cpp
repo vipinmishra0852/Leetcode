@@ -1,6 +1,8 @@
 class Solution {
 public:
  bool check(long long mid, long long totalTrips, vector<int>& time) {
+    ios_base::sync_with_stdio(NULL);
+    cin.tie(NULL);
     int n = time.size();
     long long m = 0;
     for (int i = 0; i < n; ++i) {
