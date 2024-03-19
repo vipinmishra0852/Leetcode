@@ -1,6 +1,8 @@
 class Solution {
 public:
     bool search(vector<int>& nums, int target) {
+        ios_base::sync_with_stdio(NULL);
+        cin.tie(NULL);
         sort(nums.begin(),nums.end());
         int lo=0;
         int n=nums.size();
