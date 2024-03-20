@@ -21,6 +21,8 @@ public:
     }
     
     int minDays(vector<int>& bloomDay, int m, int k) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
         int n = bloomDay.size();
            int maxi =0;
            
