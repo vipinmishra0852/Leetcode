@@ -1,6 +1,8 @@
 class Solution {
 public:
     string makeGood(string s) {
+        ios::sync_with_stdio(false);
+        cin.tie(NULL);
         int n=s.size();
         int i=0;
         while(i<n){
