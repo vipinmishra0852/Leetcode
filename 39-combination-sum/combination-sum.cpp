@@ -18,9 +18,9 @@ public:
     }
 
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        // ios::sync_with_stdio(false);
-        // cin.tie(NULL);
-        // cout.tie(NULL);
+        ios::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
         vector<vector<int>> result;
         vector<int> current;
         combination(result, current, candidates, target, 0);
