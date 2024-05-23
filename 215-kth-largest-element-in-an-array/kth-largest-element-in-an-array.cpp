@@ -42,6 +42,8 @@ public:
     }
 
     int findKthLargest(vector<int>& nums, int k) {
+        ios::sync_with_stdio(false);
+        cin.tie(NULL);
         int n = nums.size();
         return quickSelect(nums, 0, n - 1, k - 1);
     }
