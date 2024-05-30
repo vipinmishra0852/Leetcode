@@ -21,6 +21,8 @@ public:
     }
 
     ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ios::sync_with_stdio(false);
+        cin.tie(NULL);
         int s = get_size(head);
         int idx_to_remove = s - n;
         
