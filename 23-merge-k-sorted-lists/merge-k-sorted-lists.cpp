@@ -27,6 +27,8 @@ public:
     }
 
     ListNode* mergeKLists(vector<ListNode*>& arr) {
+        ios::sync_with_stdio(false);
+        cin.tie(NULL);
         if(arr.size()==0) return NULL;
         while(arr.size()>1)
         {
