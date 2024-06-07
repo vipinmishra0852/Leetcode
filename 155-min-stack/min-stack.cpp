@@ -4,6 +4,9 @@ stack<long long>st;
 long long min;
 
     MinStack() {
+      ios::sync_with_stdio(false);
+      cin.tie(NULL);
+      cout.tie(NULL);
       min=LLONG_MAX;  
     }
     
