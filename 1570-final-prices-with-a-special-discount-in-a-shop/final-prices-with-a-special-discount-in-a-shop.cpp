@@ -1,9 +1,9 @@
 class Solution {
 public:
     vector<int> finalPrices(vector<int>& arr) {
-        ios::sync_with_stdio(false);
-        cin.tie(NULL);
-        cout.tie(NULL);
+        // ios::sync_with_stdio(false);
+        // cin.tie(NULL);
+        // cout.tie(NULL);
         int n=arr.size();
         vector<int>ans(n,0);
         ans[n-1]=arr[n-1];
