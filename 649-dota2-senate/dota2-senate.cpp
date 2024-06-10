@@ -2,8 +2,7 @@ class Solution
 {
 public:
   string predictPartyVictory(string s)
-  { ios::sync_with_stdio(false);
-    cin.tie(NULL);
+  { 
     queue<int> q;
     queue<int> d;
     queue<int> r;
