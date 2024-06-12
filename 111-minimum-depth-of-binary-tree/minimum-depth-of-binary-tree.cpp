@@ -21,7 +21,7 @@ public:
          int right =  helper(root->right,l+1); 
          return min(left,right);
          }
-         int left = helper( root->left,l+1);
+         int left = helper(root->left,l+1);
          int right =  helper(root->right,l+1);
          return min(left,right);
     }
