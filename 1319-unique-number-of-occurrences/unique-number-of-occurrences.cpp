@@ -10,7 +10,7 @@ public:
          set<int>s;
          for(auto i:m)
          {
-            if(s.count(i.second)>0)
+            if(s.find(i.second)!=s.end())
              {
                 return false;
              }
