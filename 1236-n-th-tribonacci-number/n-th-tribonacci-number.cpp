@@ -1,22 +1,22 @@
 class Solution {
 public:
-map<int, int> memo; 
-    int tribonacci(int n) {
-        if (memo.find(n) != memo.end()) { 
-            return memo[n];
-        }
-
-        int result;
-        if (n == 0) {
-            result = 0;
-        } else if (n == 1 || n == 2) {
-            result = 1;
-        } else {
-            result = tribonacci(n - 1) + tribonacci(n - 2) + tribonacci(n - 3);
-        }
-
-        memo[n] = result;
-        return result;
+    int helper(vector<int>&dp,int n)
+    {if(n == 0) return 0;
+     if(n <=2) return 1;
+     if(dp[n] != -1) return dp[n];
+     dp[n] = helper(dp,n-1) + helper(dp,n-2) + helper(dp,n-3);
+     return dp[n];
     }
-    
+    int tribonacci(int n) 
+    {
+    if(n == 0) return 0;
+    if(n == 1) return 1;
+    if(n == 2) return 1;
+    vector<int>dp(n+1,-1);
+    dp[0] = 0;
+    dp[1] = 1;
+    dp[2] = 1;
+    int ans = helper(dp,n);
+    return ans;
+    }
 };
