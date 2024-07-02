@@ -1,7 +1,7 @@
 class Solution {
 public:
     int n,m;
-    vector<vector<int>>grid,dp;
+    vector<vector<long long int>>grid,dp;
     int f(int i,int j)
     {   if(i < 0 || j < 0 || i >=n || j >= m) return 0;
         if(grid[i][j] == 1) return 0;   
@@ -11,12 +11,31 @@ public:
     }
     int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid)
     {
-      grid = obstacleGrid;
-      n = grid.size();
-      m = grid[0].size();
+    //   grid = obstacleGrid;
+      n = obstacleGrid.size();
+      m = obstacleGrid[0].size();
       dp.clear();
-      dp.resize(105,vector<int>(105,-1));
-      if(grid[n-1][m-1] == 1) return 0;
-      return f(0,0);  
+      dp.resize(105,vector< long long int>(105,0));
+      if(obstacleGrid[n-1][m-1] == 1) return 0;
+      dp[n-1][m-1] = 1;
+      for(int i = n-2;i>=0;i--)
+      {
+       if(obstacleGrid[i][m-1] == 1) dp[i][m-1] = 0;
+       else dp[i][m-1] = dp[i+1][m-1];
+      }
+      for(int i = m-2;i>=0;i--)
+      {
+       if(obstacleGrid[n-1][i] == 1) dp[n-1][i] = 0;
+       else dp[n-1][i] = dp[n-1][i+1];
+      }
+      for(int i = n-2 ; i>=0;i--)
+      {
+        for(int j = m-1 ; j>=0;j--)
+        {
+         if(obstacleGrid[i][j] == 1) dp[i][j] = 0;
+         else dp[i][j] = dp[i+1][j] + dp[i][j+1];
+        }
+      }
+      return dp[0][0];  
     }
 };
