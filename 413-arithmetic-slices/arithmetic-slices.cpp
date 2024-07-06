@@ -1,10 +1,12 @@
 class Solution {
 public:
+    int dp[5005];
     vector<int>copy;
     int n;
     int helper(int idx,int &count)
     {
     if(idx == n-1) return 0;
+    if(dp[idx]!=-1) return dp[idx];
     if(copy[idx] - copy[idx-1] == copy[idx+1] - copy[idx]) 
         {
          count++;
@@ -19,10 +21,11 @@ public:
         }
         
         }
-        return helper(idx+1,count); 
+        return dp[idx] = helper(idx+1,count); 
     }
     int numberOfArithmeticSlices(vector<int>& nums) 
     {   n = nums.size();
+    memset(dp,-1,sizeof(dp));
     int count = 0;
        if(n<3) return 0; 
        int idx = 1;
