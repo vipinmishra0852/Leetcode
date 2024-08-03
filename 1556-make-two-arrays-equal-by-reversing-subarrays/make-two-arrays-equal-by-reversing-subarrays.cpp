@@ -1,6 +1,8 @@
 class Solution {
 public:
     bool canBeEqual(vector<int>& target, vector<int>& arr) {
+        ios::sync_with_stdio(0);
+        cin.tie(0);
       int ele = 0;
       int n = arr.size();
       map<int,int>m1;
