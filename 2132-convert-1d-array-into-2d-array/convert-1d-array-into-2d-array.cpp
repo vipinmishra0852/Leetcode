@@ -9,14 +9,10 @@ public:
     return {};
     else
     {
-        int k=0;
-        for(int i = 0;i<m;i++)
+        for(int i = 0;i<m*n;i++)
         {
-            for(int j = 0 ; j <n;j++)
-            {
-             ans[i][j]=nums[k];
-             k++;
-            }
+           ans[i/n][i%n]=nums[i];
+        
         }
     }
     return ans;
