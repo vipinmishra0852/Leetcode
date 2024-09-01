@@ -3,10 +3,10 @@ public:
     vector<vector<int>> construct2DArray(vector<int>& nums, int m, int n)
     {
     vector<vector<int>>ans(m,vector<int>(n,0));
-    vector<vector<int>>empty;
+    
     int s = nums.size();
     if(s!=m*n)
-    return empty;
+    return {};
     else
     {
         int k=0;
