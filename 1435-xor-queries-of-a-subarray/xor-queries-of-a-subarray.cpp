@@ -1,23 +1,38 @@
 class Solution {
 public:
-    vector<int> xorQueries(vector<int>& arr, vector<vector<int>>& q) 
+    vector<int> xorQueries(vector<int>& arr, vector<vector<int>>& queries) 
     {
-    int r = q.size();
-    int c = q[0].size();
-    int s = arr.size();
-    vector<int>ans;
-    for(int i=0;i<r;i++)
-    {
-        vector<int>temp(2,0);
-        temp[0] = q[i][0];
-        temp[1] = q[i][1];
-        int res=0;
-        for(int j=temp[0];j<=temp[1];j++)
+        int s = arr.size();
+        
+        // Initialize the prefix XOR array with the size of arr
+        vector<int> preXor(s, 0);
+        preXor[0] = arr[0];
+        
+        // Build the prefix XOR array
+        for (int i = 1; i < s; i++)
         {
-         res=res^arr[j];
+            preXor[i] = preXor[i - 1] ^ arr[i];
         }
-        ans.push_back(res);
-    }  
-    return ans;   
+        
+        int r = queries.size();
+        vector<int> res;
+        
+        // Process each query
+        for (int j = 0; j < r; j++)
+        {
+            int left = queries[j][0];
+            int right = queries[j][1];
+            
+            // XOR from left to right: 
+            // If left == 0, the result is just preXor[right]
+            if (left == 0) {
+                res.push_back(preXor[right]);
+            } else {
+                // Otherwise, XOR is preXor[right] ^ preXor[left-1]
+                res.push_back(preXor[right] ^ preXor[left - 1]);
+            }
+        }
+        
+        return res;
     }
 };
