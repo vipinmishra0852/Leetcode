@@ -6,9 +6,9 @@ public:
 
     bool book(int start, int end) 
     {
-        for (const auto& interval : v) 
+        for (const auto& i : v) 
         {
-            if (!(interval.second <= start || interval.first >= end)) 
+            if (!(i.second <= start || i.first >= end)) 
             {
                 return false;
             }
