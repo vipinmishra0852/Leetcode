@@ -1,6 +1,9 @@
 class Solution {
 public:
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        ios::sync_with_stdio(0);
+        cin.tie(0);
+        cout.tie(0);
         // Initialize the graph as an adjacency list
         vector<vector<int>> graph(numCourses);
         vector<int> indegree(numCourses, 0);
