@@ -10,19 +10,27 @@ public:
     }
 
     int specialArray(vector<int>& arr) {
-        int maxi = INT_MIN;
+        sort(arr.begin(), arr.end());
         int n = arr.size();
+        int maxi = arr[n - 1];  // Corrected this line, max is the last element after sorting
 
-        for (int i = 0; i < n; i++) {
-            maxi = max(maxi, arr[i]);
-        }
+        int low = 1;
+        int high = maxi;
+        int ans = -1;
 
-        for (int i = 1; i <= maxi; i++) { // Changed range to include `maxi`
-            if (func(arr, i) == i) {
-                return i;
+        while (low <= high) {
+            int mid = (low + high) / 2;
+            int special = func(arr, mid);
+
+            if (special == mid) {
+                ans = mid;
+                break;
+            } else if (special > mid) {
+                low = mid + 1;  // Corrected case: low was in lowercase
+            } else {
+                high = mid - 1;  // Corrected case: high was in lowercase
             }
         }
-
-        return -1;
+        return ans;
     }
 };
