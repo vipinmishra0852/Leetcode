@@ -1,33 +1,28 @@
 class Solution {
 public:
-    int search(vector<int>& nums, int k) {
-        int lo = 0;
-        int hi = nums.size() - 1;
-        while (lo <= hi) {
-            int mid = lo + (hi - lo) / 2;
-            if (nums[mid] == k) {
-                return mid;
-            } else if (nums[mid] < k) {
-                lo = mid + 1;
-            } else {
-                hi = mid - 1;
-            }
+    int func(vector<int>& arr, int find) {
+        int cnt = 0;
+        int n = arr.size();
+        for (int i = 0; i < n; i++) {
+            if (arr[i] >= find) cnt++;
         }
-        return -1;
+        return cnt;
     }
 
-    int specialArray(vector<int>& nums) {
-        ios::sync_with_stdio(false);
-        cin.tie(NULL);
-        sort(nums.begin(), nums.end());
-        int n = nums.size();
-        
-        for (int x = 1; x <= n; ++x) {
-            int idx = n - x;
-            if (nums[idx] >= x && (idx == 0 || nums[idx - 1] < x)) {
-                return x;
+    int specialArray(vector<int>& arr) {
+        int maxi = INT_MIN;
+        int n = arr.size();
+
+        for (int i = 0; i < n; i++) {
+            maxi = max(maxi, arr[i]);
+        }
+
+        for (int i = 1; i <= maxi; i++) { // Changed range to include `maxi`
+            if (func(arr, i) == i) {
+                return i;
             }
         }
+
         return -1;
     }
 };
