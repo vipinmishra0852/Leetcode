@@ -7,22 +7,20 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
 class Solution {
 public:
-    bool exists(TreeNode* root, TreeNode* target)
-    {
-        if(root==NULL) return false;
-        if(root->val==target->val) return true;
-        if(root->val<target->val) return exists(root->right,target);
-         return exists(root->left,target);
-        
-    }
-    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) 
-    {
-     if(root==p || root==q) return root;
-     else if( ( exists(root->left,p) ) && ( exists(root->right,q) ) ) return root;
-     else if( ( exists (root->left,q) ) && ( exists(root->right,p) ) ) return root;
-     else if( (exists (root->left,p) ) && ( exists(root->left,q) ) )  return lowestCommonAncestor(root->left,p,q);
-     else return lowestCommonAncestor(root->right,p,q);
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        if(root == NULL) return NULL;
+    if(root == p || root == q) return root;
+    TreeNode* leftN = lowestCommonAncestor(root->left,p,q);
+    TreeNode* rightN = lowestCommonAncestor(root->right,p,q);
+
+    if(leftN != NULL && rightN != NULL)
+    return root;
+    if(leftN != NULL)
+    return leftN;
+    
+    return rightN; 
     }
 };
