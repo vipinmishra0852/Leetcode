@@ -11,24 +11,25 @@
  */
 class Solution {
 public:
+    bool solve(TreeNode* root,int &idx,int &nodes)
+    {
+        if(root == NULL) return true;
+        if(idx >= nodes) return false;
+       
+        int i = 2*idx + 1;
+        int j = 2*idx + 2;
+        return (solve(root->left,i,nodes) && solve(root->right,j,nodes));
+    }
+    int countnodes(TreeNode* root)
+    {
+        if(root == NULL) return 0;
+        return 1 + countnodes(root->left) + countnodes(root->right);
+    }
     bool isCompleteTree(TreeNode* root) 
     {
-    queue<TreeNode*>q;
-    q.push(root);
-    bool past = false;
-    while(!q.empty())
-    {
-        TreeNode* temp = q.front();
-        q.pop();
-        if(temp)
-        {
-           if(past) return false;
-           q.push(temp->left);
-           q.push(temp->right);
-        }
-        else past = true;
-        
-    }    
-    return true;
+     int nodes = countnodes(root); 
+     int i = 0;
+     bool ans = solve(root,i,nodes);
+     return ans;  
     }
 };
