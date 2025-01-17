@@ -11,25 +11,14 @@
  */
 class Solution {
 public:
-    bool ans=false;
-    void helper(TreeNode* root, int targetSum) 
+    bool hasPathSum(TreeNode* root, int targetSum) 
     {
-        if(root==NULL) return;
-        if(root->left==NULL && root->right==NULL) 
-        {
-            if(root->val-targetSum==0)
-            {
-                ans=true;
-                
-            }
-            return ;
-        }
-        helper(root->left,targetSum-(root->val));
-        helper(root->right,targetSum-(root->val));
+    if(root == NULL) return false;
+    if(root->left == NULL && root->right == NULL)
+    {
+        if(targetSum == root->val) return true;
     }
-    bool hasPathSum(TreeNode* root, int targetSum) {
-       if(root==NULL) return false;
-       helper(root,targetSum);
-       return ans;
+    return hasPathSum(root->left,targetSum - root->val) || hasPathSum(root->right,targetSum - root->val);;
+        
     }
 };
