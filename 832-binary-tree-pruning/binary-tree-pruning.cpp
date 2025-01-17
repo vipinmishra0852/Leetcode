@@ -11,29 +11,12 @@
  */
 class Solution {
 public:
-    bool isone(TreeNode* root)
-    {
-        if(root == NULL) return false;
-        if(root->val == 1)
-        {
-            return true;
-        }
-        return isone(root->left) || isone(root->right);
-    }
     TreeNode* pruneTree(TreeNode* root) 
     {
     if(root == NULL) return NULL;
-    if(!isone(root->left))
-    {
-      root->left = NULL;
-    }
-     if(!isone(root->right))
-    {
-      root->right = NULL;
-    }
-    if(root->left)pruneTree(root->left);
-    if(root->right)pruneTree(root->right);
-    if(root ->left == NULL && root->right == NULL && root->val == 0) return NULL;
-    return root;
+    root->left = pruneTree(root->left);
+    root->right = pruneTree(root->right);
+    if(root->val == 0 && root->left == NULL && root->right == NULL) return NULL;
+    return root;    
     }
 };
