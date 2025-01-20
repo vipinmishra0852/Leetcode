@@ -6,8 +6,9 @@ public:
         if(root == NULL ) return ;
         
         helper(root->left,count);
-        count = count + 1;
         helper(root->right,count);
+        count = count + 1;
+        
     }
     int countNodes(TreeNode* root) 
     {
