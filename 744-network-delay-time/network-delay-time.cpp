@@ -19,11 +19,14 @@ public:
     {
         int d = pq.top().first;
         int node = pq.top().second;
-        pq.pop();
+         pq.pop();
+        if(d > result[node]) continue;
+       
         for(auto &it:adj[node])
         {
         int adjNode = it.first;
         int dist = it.second;
+        
         if(d + dist < result[adjNode])
         {
             result[adjNode] = d + dist;
