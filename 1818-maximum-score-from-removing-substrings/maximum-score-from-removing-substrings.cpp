@@ -1,93 +1,37 @@
 class Solution {
 public:
-    int removeab(string &s)
-    {
-       stack<char>st;
-       int sz = s.length();
-       int m = 0;
-       for(int i = 0 ; i < sz ; i++)
-        {
-            char ch = s[i];
-            if(st.size() == 0) st.push(ch);
-            else 
-            {
-                char check = st.top();
-                string temp = "";
-                temp+=check;
-                temp+=s[i];
-                if(temp == "ab")
-                {
-                     m++;
-                     st.pop();
-                }
-                else st.push(s[i]);
+    int removePair(string &s, char first, char second) {
+        stack<char> st;
+        int count = 0;
+
+        for (char ch : s) {
+            if (!st.empty() && st.top() == first && ch == second) {
+                st.pop();
+                count++;
+            } else {
+                st.push(ch);
+            }
         }
 
-    }
-    string temp = "";
-    while(!st.empty())
-    {
-        
-        temp+=st.top();
-        st.pop();
-    }
-    reverse(temp.begin(),temp.end());
-    s = temp;
-    return m;
-    } 
-    int removeba(string &s)
-    {
-        stack<char>st;
-       int sz = s.length();
-       int m = 0;
-       for(int i = 0 ; i < sz ; i++)
-        {
-            char ch = s[i];
-            if(st.size() == 0) st.push(ch);
-            else 
-            {
-                char check = st.top();
-                string temp = "";
-                temp+=check;
-                temp+=s[i];
-                if(temp == "ba")
-                {
-                     m++;
-                     st.pop();
-                }
-                else st.push(s[i]);
+        string temp;
+        while (!st.empty()) {
+            temp += st.top();
+            st.pop();
         }
+        reverse(temp.begin(), temp.end());
+        s = temp;
+        return count;
+    }
 
-    }
-     string temp = "";
-    while(!st.empty())
-    {
-        
-        temp+=st.top();
-        st.pop();
-    }
-    reverse(temp.begin(),temp.end());
-    s = temp;
-    return m;
-    }
     int maximumGain(string s, int x, int y) {
-       int m = 0;
-       int n = 0;
-       
-        
-        if(x > y) {
-             m = removeab(s);
-             n = removeba(s);
+        int score = 0;
+        if (x > y) {
+            score += x * removePair(s, 'a', 'b');
+            score += y * removePair(s, 'b', 'a');
+        } else {
+            score += y * removePair(s, 'b', 'a');
+            score += x * removePair(s, 'a', 'b');
         }
-        else
-        {
-            n = removeba(s);
-            m = removeab(s);
-        }
-        
-          int ans = m*x + n * y;
-        return ans;
-             
-            
-        }
+        return score;
+    }
 };
