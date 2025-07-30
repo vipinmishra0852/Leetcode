@@ -1,39 +1,21 @@
 class Solution {
 public:
- long long int nCr(int N, int r)
-{
-    long long res = 0;
-    if (r == 0) {
-        return 1;
-    }
-    else {
-        res = nCr(N, r - 1)
-              * (N - r + 1) / r;
-    }
-    return res;
+ vector<int>dp;
+ int Stairs(int n)
+{ 
+    
+    if(n==2) return dp[n] = 2;
+    if(n==1) return dp[n] =  1;
+    if(dp[n] != -1) return dp[n];
+
+    return dp[n] = Stairs(n-1)+Stairs(n-2);
+    
 }
-    int climbStairs(int n) {
-         ios_base::sync_with_stdio(false);
-        cin.tie(NULL);
-        int N=0;
-        int r=0;
-         long long Res=0;
-        if(n%2==0){
-          N=n/2;
-            r=0;
-            Res=1;
-        }
-        else{
-            N=(n/2)+1;
-            r=1;
-            Res=1;
-        }
-       
-       while(N>r){
-            Res=Res+nCr(N,r);
-           N++;
-           r+=2;
-       }
-        return Res;
-    }
+int climbStairs(int n){
+     ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    dp.resize(n+1,-1);
+    return Stairs(n);
+}
+
 };
