@@ -14,7 +14,6 @@ public:
         if(!head) return false;
         map<ListNode*,int>mp;
         ListNode* temp = head;
-        int size = 0;
         while(temp!=NULL)
         {
             if(mp[temp] == 0)
