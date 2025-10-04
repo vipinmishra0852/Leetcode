@@ -11,14 +11,22 @@ public:
     bool hasCycle(ListNode *head) {
         ios::sync_with_stdio(false);
         cin.tie(NULL);
-        ListNode* slow=head;
-        ListNode* fast=head;
-
-        while(fast!=NULL && fast->next!=NULL)
+        if(!head) return false;
+        map<ListNode*,int>mp;
+        ListNode* temp = head;
+        int size = 0;
+        while(temp!=NULL)
         {
-            slow=slow->next;
-            fast=fast->next->next;
-            if(slow==fast) return true;
+            if(mp[temp] == 0)
+            {
+              mp[temp]++;
+              temp = temp->next;
+            }
+            else
+            {
+                return true;
+            }
+            
         }
         return false;
     }
