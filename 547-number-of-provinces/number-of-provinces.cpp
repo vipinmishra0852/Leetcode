@@ -1,33 +1,41 @@
 class Solution {
 public:
-    void dfs(vector<vector<int>>&adj,vector<bool>&visited,int u)
+    void dfs(int node,unordered_map<int,vector<int>>adj,vector<bool>&visited)
     {
-        visited[u] = true;
-        for(auto v:adj[u])
+        visited[node] = true;
+        for(int child:adj[node])
         {
-            if(!visited[v]) dfs(adj,visited,v);
+            if(!visited[child])
+            {
+                dfs(child,adj,visited);
+            }
         }
+        return;
+
     }
     int findCircleNum(vector<vector<int>>& isConnected) 
     {
+    int count = 0;
+    unordered_map<int,vector<int>>adj;
     int n = isConnected.size();
-    vector<vector<int>>adj(n,vector<int>());
-    for(int i=0;i<n;i++)
-    {
-        for(int j = 0;j<n;j++)
+    for(int i = 0 ; i < n ; i++)
+    {   
+        vector<int>temp =  isConnected[i];
+        int size =temp.size();
+        for(int j = 0 ; j < size ; j++)
         {
-            if(isConnected[i][j]) adj[i].push_back(j);
+            if(temp[j] == 1 && i != j)
+            adj[i].push_back(j);
         }
     }
-    vector<bool>visited(n,false);
-    int count = 0;
-    for(int i = 0 ;i < n ; i++)
+    vector<bool>visited(n+1,false);
+    for(int i = 0 ; i <n ; i++)
     {
-     if(!visited[i]) 
-     {
-        dfs(adj,visited,i);
-        count++;
-     }
+        if(!visited[i])
+        {
+            dfs(i,adj,visited);
+            count++;
+        }
     }
     return count;    
     }
