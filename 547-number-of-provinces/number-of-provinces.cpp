@@ -1,6 +1,6 @@
 class Solution {
 public:
-    void dfs(int node,unordered_map<int,vector<int>>adj,vector<bool>&visited)
+    void dfs(int node,unordered_map<int,vector<int>>&adj,vector<bool>&visited)
     {
         visited[node] = true;
         for(int child:adj[node])
