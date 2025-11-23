@@ -1,62 +1,54 @@
-
 class Solution {
 public:
-    int orangesRotting(vector<vector<int>>& grid) {
-        int n = grid.size();
-        int m = grid[0].size();
-        queue<pair<int, int>> q;
+    int orangesRotting(vector<vector<int>>& grid) 
+    {
+        int m = grid.size();
+        int n = grid[0].size();
+
+        queue<pair<int,int>> q;
         int fresh = 0;
-        
-        // Initialize the queue with all the initially rotten oranges
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-                if (grid[i][j] == 2) {
-                    q.push({i, j});
-                } else if (grid[i][j] == 1) {
-                    fresh++;
-                }
+
+        // Step 1: count fresh oranges & push rotten oranges to queue
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (grid[i][j] == 2) q.push({i, j});
+                else if (grid[i][j] == 1) fresh++;
             }
         }
-          q.push({-1,-1});
-        if (fresh == 0) return 0; // No fresh oranges to rot
-        
-        int minutes = 0; 
-        vector<vector<int>> directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
-        // BFS to simulate the rotting process
+        if (fresh == 0) return 0;
+
+        int time = -1;
+        int dirs[4][2] = {{1,0},{-1,0},{0,1},{0,-1}};
+
+        // BFS
         while (!q.empty()) 
         {
-            auto cell = q.front();
-            q.pop();
-            if(cell.first == -1 && cell.second == -1)
+            int sz = q.size();
+            time++;
+
+            while (sz--) 
             {
-                minutes++;
-                if(!q.empty())
+                auto [r, c] = q.front();
+                q.pop();
+
+                for (auto &d : dirs) 
                 {
-                    q.push({-1,-1});
+                    int nr = r + d[0];
+                    int nc = c + d[1];
+
+                    // check boundaries & fresh orange
+                    if (nr >= 0 && nr < m && nc >= 0 && nc < n &&
+                        grid[nr][nc] == 1)
+                    {
+                        grid[nr][nc] = 2;  // rot it
+                        fresh--;
+                        q.push({nr, nc});
+                    }
                 }
-                else {break;}
             }
-            else
-            {
-              int i = cell.first;
-              int j = cell.second;
-              for(int  d = 0 ; d < 4 ;d++)
-              {
-                int nr = i + directions[d][0];
-                int nc = j + directions[d][1];
-                if(nr < 0 || nc < 0 || nr >= n || nc >= m) continue;
-                if(grid[nr][nc] == 2 || grid[nr][nc] == 0) continue;
-                fresh--;
-                grid[nr][nc] = 2;
-                q.push({nr,nc});
-
-              }
-
-            }
-            
         }
 
-        return fresh == 0 ? minutes-1 : -1;
+        return fresh == 0 ? time : -1;
     }
 };
