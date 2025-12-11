@@ -17,14 +17,19 @@ public:
     // temp = nums;
     // helper(n-1);
     dp[0] = nums[0];
+    int prev1 = nums[0];
+    int curr = 0;
+    int prev2=0;
     for(int idx = 1 ; idx < n ; idx++)
     {
         int pick = nums[idx];
-        if( idx-2 >= 0 ) pick+=dp[idx-2];
-        int not_pick = dp[idx-1];
-        dp[idx] = max(pick,not_pick);
+        if( idx-2 >= 0 ) pick+=prev2;
+        int not_pick = prev1;
+        curr = max(pick,not_pick);
+        prev2 = prev1;
+        prev1 = curr;
     }
 
-    return dp[n-1]; 
+    return prev1; 
     }
 };
